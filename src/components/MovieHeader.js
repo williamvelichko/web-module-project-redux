@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const MovieHeader = (props) => {
-  const appTitle = props.appTitle;
+  const { appTitle } = props;
 
   const displayFavorites = true;
 

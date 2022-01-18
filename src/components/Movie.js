@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { Route, useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteMovie } from "../actions/movieActions";
 
@@ -7,11 +7,12 @@ const Movie = (props) => {
   const { id } = useParams();
   const { push } = useHistory();
 
-  const movies = props.movies;
+  const { movies } = props;
   const movie = movies.find((movie) => movie.id === Number(id));
 
-  const handleDelete = () => {
-    props.deleteMovie();
+  const handleDelete = (id) => {
+    props.deleteMovie(id);
+    push("/movies");
   };
 
   return (
@@ -54,12 +55,11 @@ const Movie = (props) => {
 
               <section>
                 <span className="m-2 btn btn-dark">Favorite</span>
-                <span className="delete">
+                <span className="delete" onClick={() => handleDelete(movie.id)}>
                   <input
                     type="button"
                     className="m-2 btn btn-danger"
                     value="Delete"
-                    onClick={handleDelete}
                   />
                 </span>
               </section>
@@ -73,6 +73,7 @@ const Movie = (props) => {
 const mapStateToProps = (state) => {
   return {
     movies: state.movies,
+    //movieId: state.movie.id,
   };
 };
 
