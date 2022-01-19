@@ -72,8 +72,9 @@ const Movie = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies,
+    movies: state.movie.movies,
     //movieId: state.movie.id,
+    displayFavorites: state.favorite.displayFavorites,
   };
 };
 
